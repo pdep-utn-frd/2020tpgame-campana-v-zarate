@@ -1,0 +1,9 @@
+import wollok.game.*
+import level.*
+import characters.*
+
+
+program padel {
+	level.inicio()
+	game.start()
+}
