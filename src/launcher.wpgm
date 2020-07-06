@@ -3,7 +3,7 @@ import level.*
 import characters.*
 
 
-program padel {
+program campanavszarate {
 	level.inicio()
 	game.start()
 }
