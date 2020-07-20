@@ -8,7 +8,7 @@ class Jugador {
     var property limiteDer
     var property contador
     var property direccion
-    var property vida = 3
+    var property vida 
 
     method image() {
         return imagen
@@ -54,24 +54,22 @@ class Jugador {
 		 x = posicion.x() + self.direccion()
 		 y = posicion.y()	
 		contador = contador -1
+		level.agregarPiedra(self)
 		var piedraA = new Piedras(imagen ="piedra_1.png", posicion = game.at(x,y), limiteIzq = -1, limiteDer = 7, move = true)
 		game.addVisual(piedraA)
 		if(self.limiteIzq() <= 3){
-		game.onTick(300,"moverse",{piedraA.moverDerecha(self)})	
+		game.onTick(150,"moverse",{piedraA.moverDerecha(self)})	
 		}
 		else{
-			game.onTick(300,"moverse",{piedraA.moverIzquierda(self)})
+			game.onTick(150,"moverse",{piedraA.moverIzquierda(self)})
 			}
 				}
 				 					
 		}
-	method recibirGolpe(player){	
-		vida -= 1
-		
+	method recibirGolpe(){
+		vida = vida -1
 	}
-	method vivo(){
-		return vida>0 
-	}		
+			
 }
 
 class Piedras {
@@ -105,11 +103,13 @@ class Piedras {
         if (move == false){
         player.aumentarContador()
         self.borrarImagen()
-        level.agregarPiedra(player)}
+        }
         
-        else{self.borrarImagen()
-        	
-        	}     
+        else{player.recibirGolpe()	
+			self.borrarImagen()
+			        	
+        	}    	    
     }
+    
    
 }

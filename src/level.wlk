@@ -13,8 +13,8 @@ object level {
 		game.width(7)
 		game.height(3)
 		game.boardGround("gigantedevillafox.png")
-		p1 = new Jugador(imagen = "cadu1.png", posicion = game.at(1, 1), limiteIzq = 0, limiteDer = 2, direccion = 1, contador = 0)
-		p2 = new Jugador(imagen = "dalmine_1.png", posicion = game.at(5, 1), limiteIzq = 4, limiteDer = 6, direccion = -1, contador = 0)
+		p1 = new Jugador(imagen = "cadu1.png", posicion = game.at(1, 1), limiteIzq = 0, limiteDer = 2, direccion = 1, contador = 0, vida = 3)
+		p2 = new Jugador(imagen = "dalmine_1.png", posicion = game.at(5, 1), limiteIzq = 4, limiteDer = 6, direccion = -1, contador = 0, vida=3)
 		self.comandoTeclas()
         piedra1 = new Piedras(imagen ="piedra_1.png" , posicion = game.at(2,1), limiteIzq = -1, limiteDer = 7, move = false)
         piedra2 = new Piedras(imagen ="piedra_1.png" , posicion = game.at(4,1), limiteIzq = -1, limiteDer = 7, move = false)
@@ -24,11 +24,9 @@ object level {
 		game.addVisual(piedra2)
 		game.onCollideDo(p1, { i => i.serAgarradoPor(p1)})
 		game.onCollideDo(p2, { i => i.serAgarradoPor(p2)})
-//        game.onCollideDo(p1, {i => i.recibeGolpe(p1)})
-//        game.onCollideDo(p2, {i => i.recibeGolpe(p2)})
 	}
 
-	// Spawn piedra random
+	
 	method agregarPiedra(player) {
 		if (player.contador() < 3) {
 			var x
@@ -41,8 +39,8 @@ object level {
 			y = 0.randomUpTo(2).roundUp()
 			var piedraR = new Piedras(imagen = "piedra_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 7, move = false)
 			game.addVisual(piedraR)
-		}
-		else (player.contador() <= 0){
+				   }
+			else{ 
 			var x
 			var y
 			if (player.limiteIzq() == 0) {
@@ -53,9 +51,9 @@ object level {
 			y = 0.randomUpTo(2).roundUp()
 			var piedraR = new Piedras(imagen = "piedra_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 7, move = false)
 			game.addVisual(piedraR)
-		}
+					}
 		
-	}
+		}
 
 	method comandoTeclas() {
 		keyboard.w().onPressDo{ p1.moverArriba()}
@@ -70,13 +68,18 @@ object level {
 		keyboard.right().onPressDo{ p2.moverDerecha()}
 		keyboard.l().onPressDo{ p2.lanzarPiedra()}
 	}
-
-	method spawnPiedra() {
-		
-		
+	
+	
+	method gameOver(){
+		if (p1.vida() == 0){
+			game.stop()
+		}
+		if (p2.vida() == 0){
+			game.stop()
+		}
 	}
-	
-	
+}	
 
-}
+
+
 
