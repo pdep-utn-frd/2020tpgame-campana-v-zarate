@@ -10,14 +10,16 @@ object level {
 	var property contadorPiedras
 
 	method inicio() {
-		game.width(7)
-		game.height(3)
+		game.width(9)
+		game.height(5)
 		game.boardGround("gigantedevillafox.png")
-		p1 = new Jugador(imagen = "cadu1.png", posicion = game.at(1, 1), limiteIzq = 0, limiteDer = 2, direccion = 1, contador = 0, vida = 3)
-		p2 = new Jugador(imagen = "dalmine_1.png", posicion = game.at(5, 1), limiteIzq = 4, limiteDer = 6, direccion = -1, contador = 0, vida=3)
+		game.addVisualIn("3vidas.png", game.at(2,4))
+		game.addVisualIn("3vidas.png", game.at(6,4))
+		p1 = new Jugador(imagen = "cadu1.png", posicion = game.at(1, 2), limiteIzq = 0, limiteDer = 3, direccion = 1, contador = 0, vida = 3)
+		p2 = new Jugador(imagen = "dalmine_1.png", posicion = game.at(7, 2), limiteIzq = 5, limiteDer = 8, direccion = -1, contador = 0, vida=3)
 		self.comandoTeclas()
-        piedra1 = new Piedras(imagen ="piedra_1.png" , posicion = game.at(2,1), limiteIzq = -1, limiteDer = 7, move = false)
-        piedra2 = new Piedras(imagen ="piedra_1.png" , posicion = game.at(4,1), limiteIzq = -1, limiteDer = 7, move = false)
+        piedra1 = new Piedras(imagen ="piedra_1.png" , posicion = game.at(3,2), limiteIzq = -1, limiteDer = 9, move = false)
+        piedra2 = new Piedras(imagen ="piedra_1.png" , posicion = game.at(5,2), limiteIzq = -1, limiteDer = 9, move = false)
 		game.addVisual(p1)
 		game.addVisual(p2)
 		game.addVisual(piedra1)
@@ -32,24 +34,24 @@ object level {
 			var x
 			var y
 			if (player.limiteIzq() == 0) {
-				x = 0.randomUpTo(2).truncate(0)
+				x = 0.randomUpTo(3).roundUp()
 			} else {
-				x = 3.randomUpTo(6).roundUp()
+				x = 5.randomUpTo(8).roundUp()
 			}
-			y = 0.randomUpTo(2).roundUp()
-			var piedraR = new Piedras(imagen = "piedra_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 7, move = false)
+			y = 0.randomUpTo(3).roundUp()
+			var piedraR = new Piedras(imagen = "piedra_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 9, move = false)
 			game.addVisual(piedraR)
 				   }
 			else{ 
 			var x
 			var y
 			if (player.limiteIzq() == 0) {
-				x = 0.randomUpTo(2).truncate(0)
+				x = 0.randomUpTo(3).roundUp()
 			} else {
-				x = 3.randomUpTo(6).roundUp()
+				x = 5.randomUpTo(8).roundUp()
 			}
-			y = 0.randomUpTo(2).roundUp()
-			var piedraR = new Piedras(imagen = "piedra_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 7, move = false)
+			y = 0.randomUpTo(3).roundUp()
+			var piedraR = new Piedras(imagen = "piedra_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 9, move = false)
 			game.addVisual(piedraR)
 					}
 		
@@ -71,12 +73,7 @@ object level {
 	
 	
 	method gameOver(){
-		if (p1.vida() == 0){
-			game.stop()
-		}
-		if (p2.vida() == 0){
-			game.stop()
-		}
+		game.stop()
 	}
 }	
 

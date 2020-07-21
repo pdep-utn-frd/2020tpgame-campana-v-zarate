@@ -19,7 +19,7 @@ class Jugador {
     }
 
     method moverArriba() {
-        if (posicion.y() < 2) {
+        if (posicion.y() < 3) {
             posicion = posicion.up(1)}
         else {posicion}
     }
@@ -55,19 +55,24 @@ class Jugador {
 		 y = posicion.y()	
 		contador = contador -1
 		level.agregarPiedra(self)
-		var piedraA = new Piedras(imagen ="piedra_1.png", posicion = game.at(x,y), limiteIzq = -1, limiteDer = 7, move = true)
+		var piedraA = new Piedras(imagen ="piedra_1.png", posicion = game.at(x,y), limiteIzq = -1, limiteDer = 9, move = true)
 		game.addVisual(piedraA)
 		if(self.limiteIzq() <= 3){
-		game.onTick(150,"moverse",{piedraA.moverDerecha(self)})	
+		game.onTick(110,"moverse",{piedraA.moverDerecha(self)})	
+		piedraA.piedraLimite()
 		}
 		else{
-			game.onTick(150,"moverse",{piedraA.moverIzquierda(self)})
+			game.onTick(110,"moverse",{piedraA.moverIzquierda(self)})
+			piedraA.piedraLimite()
 			}
 				}
 				 					
 		}
 	method recibirGolpe(){
 		vida = vida -1
+		if (vida == 0){
+			level.gameOver()
+		}
 	}
 			
 }
@@ -111,5 +116,14 @@ class Piedras {
         	}    	    
     }
     
+    method piedraLimite(){
+    	if(posicion.x() == 9) {
+    		self.borrarImagen()
+    	}
+    	if (posicion.x() == -1){
+    		self.borrarImagen()
+    	}
+    	
+    }
    
 }
