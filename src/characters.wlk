@@ -9,7 +9,8 @@ class Jugador {
     var property contador
     var property direccion
     var property vida 
-
+    var property posicionVida
+   
     method image() {
         return imagen
     }
@@ -69,9 +70,25 @@ class Jugador {
 				 					
 		}
 	method recibirGolpe(){
+		var resultado
 		vida = vida -1
 		if (vida == 0){
 			level.gameOver()
+		}
+	}
+	method vidas(){
+		var corazones
+		if (vida == 3){
+			corazones = new Vidas(imagen = "3vidas.png", posicion = posicionVida)
+			game.addVisual(corazones)
+		}
+		if (vida == 2){
+			corazones = new Vidas(imagen ="2vidas.png", posicion = posicionVida)
+			game.addVisual(corazones)
+		}
+		if (vida == 1){
+			corazones = new Vidas(imagen = "1vida.png", posicion = posicionVida)
+			game.addVisual(corazones)
 		}
 	}
 			
@@ -112,6 +129,7 @@ class Piedras {
         
         else{player.recibirGolpe()	
 			self.borrarImagen()
+			player.vidas()
 			        	
         	}    	    
     }
@@ -127,3 +145,28 @@ class Piedras {
     }
    
 }
+
+class Vidas {
+	var imagen
+	var posicion
+	
+	method image(){
+		return imagen
+	}
+	method position(){
+		return posicion
+	}
+}
+
+class Resultado{
+	var imagen
+	var posicion
+	
+	method image(){
+		return imagen
+	}
+	method potision(){
+		return posicion
+	}
+}
+
