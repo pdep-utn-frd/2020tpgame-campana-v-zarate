@@ -9,11 +9,13 @@ object level {
 	var piedra2
 	var vidap1
 	var vidap2
+	var pantallaFinal = "gigantedevillafox.png"
+	
 
 	method inicio() {
 		game.width(9)
 		game.height(5)
-		game.boardGround("gigantedevillafox.png")
+		game.boardGround(pantallaFinal)
 		p1 = new Jugador(imagen = "cadu1.png", posicion = game.at(1, 2), limiteIzq = 0, limiteDer = 3, direccion = 1, contador = 0 , vida = 3, posicionVida = game.at(2,4))
 		p2 = new Jugador(imagen = "dalmine_1.png", posicion = game.at(7, 2), limiteIzq = 5, limiteDer = 8, direccion = -1, contador = 0, vida=3, posicionVida = game.at(6,4))
 		self.comandoTeclas()
@@ -76,15 +78,24 @@ object level {
 	
 	
 	method gameOver(){
-		game.stop()
+		keyboard.x().onPressDo{game.stop()}
+		self.ganador()
+		
 	}
-}
-
-object vida1{
 	
-}	
-
-
-
-
+	method ganador(){
+		
+		if (p1.vida() == 0)
+		{	
+			pantallaFinal = "violacampeon.png"
+			game.addVisualIn(pantallaFinal, game.center() )
+		}
+		
+		else { 
+				pantallaFinal ="caducampeon.png"
+				game.addVisualIn(pantallaFinal, game.center())
+		}
+	}
+	
+}
 

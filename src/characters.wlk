@@ -158,15 +158,3 @@ class Vidas {
 	}
 }
 
-class Resultado{
-	var imagen
-	var posicion
-	
-	method image(){
-		return imagen
-	}
-	method potision(){
-		return posicion
-	}
-}
-
