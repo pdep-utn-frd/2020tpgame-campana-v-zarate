@@ -9,3 +9,4 @@ program campanavszarate {
 	sonido = game.sound("yoTeSigo.mp3")
 	sonido.play()
 }
+ 
