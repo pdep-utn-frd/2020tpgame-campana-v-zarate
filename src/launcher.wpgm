@@ -2,8 +2,10 @@ import wollok.game.*
 import level.*
 import characters.*
 
-
 program campanavszarate {
+	var sonido
 	level.inicio()
 	game.start()
+	sonido = game.sound("yoTeSigo.mp3")
+	sonido.play()
 }
