@@ -1,6 +1,9 @@
 import wollok.game.*
-import level.*
 import characters.*
+import level.*
+import logica.*
+import piedras.*
+import vidas.*
 
 program campanavszarate {
 	var sonido
@@ -9,4 +12,3 @@ program campanavszarate {
 	sonido = game.sound("yoTeSigo.mp3")
 	sonido.play()
 }
- 
