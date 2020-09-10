@@ -1,5 +1,8 @@
 import wollok.game.*
 import level.*
+import logica.*
+import piedras.*
+import vidas.*
 
 class Jugador {
 
@@ -23,32 +26,24 @@ class Jugador {
 	method moverArriba() {
 		if (posicion.y() < 3) {
 			posicion = posicion.up(1)
-		} else {
-			posicion
 		}
 	}
 
 	method moverIzquierda() {
 		if (posicion.x() > limiteIzq) {
 			posicion = posicion.left(1)
-		} else {
-			posicion
 		}
 	}
 
 	method moverAbajo() {
 		if (posicion.y() > 0) {
 			posicion = posicion.down(1)
-		} else {
-			posicion
 		}
 	}
 
 	method moverDerecha() {
 		if (posicion.x() < limiteDer) {
 			posicion = posicion.right(1)
-		} else {
-			posicion
 		}
 	}
 
@@ -63,8 +58,8 @@ class Jugador {
 			x = posicion.x() + self.direccion()
 			y = posicion.y()
 			contador = contador - 1
-			level.agregarPiedra(self)
-			var piedraA = new Piedras(imagen = "piedra_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 9, move = true)
+			logica.agregarPiedra(self)
+			const piedraA = new Piedras(imagen = "piedra_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 9, move = true)
 			game.addVisual(piedraA)
 			if (self.limiteIzq() <= 3) {
 				game.onTick(110, "moverse", { piedraA.moverDerecha(self)})
@@ -77,10 +72,9 @@ class Jugador {
 	}
 
 	method recibirGolpe() {
-		var resultado
 		vida = vida - 1
 		if (vida == 0) {
-			level.gameOver()
+			logica.gameOver()
 		}
 	}
 
@@ -100,71 +94,21 @@ class Jugador {
 		}
 	}
 
-}
-
-class Piedras {
-
-	var imagen
-	var posicion
-	const limiteIzq
-	const limiteDer
-	var property move
-
-	method image() {
-		return imagen
+	method comandoTeclasP1() {
+		keyboard.w().onPressDo{ self.moverArriba()}
+		keyboard.a().onPressDo{ self.moverIzquierda()}
+		keyboard.s().onPressDo{ self.moverAbajo()}
+		keyboard.d().onPressDo{ self.moverDerecha()}
+		keyboard.g().onPressDo{ self.lanzarPiedra()}
 	}
 
-	method position() {
-		return posicion
-	}
-
-	method moverIzquierda(player) {
-		posicion = posicion.left(1)
-	}
-
-	method moverDerecha(player) {
-		posicion = posicion.right(1)
-	}
-
-	method borrarImagen() {
-		game.removeVisual(self)
-	}
-
-	method serAgarradoPor(player) {
-		if (move == false) {
-			player.aumentarContador()
-			self.borrarImagen()
-		} else {
-			player.recibirGolpe()
-			self.borrarImagen()
-			player.vidas()
-		}
-	}
-
-	method piedraLimite() {
-		if (posicion.x() == 9) {
-			self.borrarImagen()
-		}
-		if (posicion.x() == -1) {
-			self.borrarImagen()
-		}
+	method comandoTeclasP2() {
+		keyboard.up().onPressDo{ self.moverArriba()}
+		keyboard.left().onPressDo{ self.moverIzquierda()}
+		keyboard.down().onPressDo{ self.moverAbajo()}
+		keyboard.right().onPressDo{ self.moverDerecha()}
+		keyboard.l().onPressDo{ self.lanzarPiedra()}
 	}
 
 }
 
-class Vidas {
-
-	var imagen
-	var posicion
-
-	method image() {
-		return imagen
-	}
-
-	method position() {
-		return posicion
-	}
-
-}
-
- 
