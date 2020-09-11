@@ -10,6 +10,8 @@ object level {
 	var property p2
 	var piedra1
 	var piedra2
+	var piedra1M
+	var piedra2M
 	var vidap1
 	var vidap2
 	const cancha = "gigantedevillafox.png"
@@ -24,10 +26,14 @@ object level {
 		p2.comandoTeclasP2()
 		piedra1 = new Piedra(imagen = "piedra_1.png", posicion = game.at(3, 2), limiteIzq = -1, limiteDer = 9, move = false)
 		piedra2 = new Piedra(imagen = "piedra_1.png", posicion = game.at(5, 2), limiteIzq = -1, limiteDer = 9, move = false)
+		piedra1M = new PiedraMagica(imagen = "piedra_magica_1.png", posicion = game.at(0, 0), limiteIzq = -1, limiteDer = 9, move = false)
+		piedra2M = new PiedraMagica(imagen = "piedra_magica_2.png", posicion = game.at(8, 0), limiteIzq = -1, limiteDer = 9, move = false)
 		vidap1 = new Vida(imagen = "3vidas.png", posicion = game.at(2, 4))
 		vidap2 = new Vida(imagen = "3vidas.png", posicion = game.at(6, 4))
 		game.addVisual(vidap1)
 		game.addVisual(vidap2)
+		game.addVisual(piedra1M)
+		game.addVisual(piedra2M)
 		game.addVisual(p1)
 		game.addVisual(p2)
 		game.addVisual(piedra1)

@@ -24,6 +24,10 @@ class Piedra {
 		posicion = posicion.right(player.direccion())
 	}
 
+	method volteada() {
+		posicion = posicion.down(1)
+	}
+
 	method borrarImagen() {
 		game.removeVisual(self)
 	}
@@ -31,6 +35,20 @@ class Piedra {
 	method serAgarradoPor(player) {
 		if (not move) {
 			player.aumentarContador()
+		} else {
+			player.recibirGolpe()
+			player.vidas()
+		}
+		self.borrarImagen()
+	}
+
+}
+
+class PiedraMagica inherits Piedra {
+
+	override method serAgarradoPor(player) {
+		if (not move) {
+			player.piedraMagica(true)
 		} else {
 			player.recibirGolpe()
 			player.vidas()
