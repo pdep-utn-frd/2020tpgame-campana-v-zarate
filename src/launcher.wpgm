@@ -2,8 +2,8 @@ import wollok.game.*
 import characters.*
 import level.*
 import logica.*
-import piedras.*
-import vidas.*
+import piedra.*
+import vida.*
 
 program campanavszarate {
 	var sonido

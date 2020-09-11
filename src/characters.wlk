@@ -1,8 +1,8 @@
 import wollok.game.*
 import level.*
 import logica.*
-import piedras.*
-import vidas.*
+import piedra.*
+import vida.*
 
 class Jugador {
 
@@ -59,15 +59,9 @@ class Jugador {
 			y = posicion.y()
 			contador = contador - 1
 			logica.agregarPiedra(self)
-			const piedraA = new Piedras(imagen = "piedra_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 9, move = true)
+			const piedraA = new Piedra(imagen = "piedra_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 9, move = true)
 			game.addVisual(piedraA)
-			if (self.limiteIzq() <= 3) {
-				game.onTick(110, "moverse", { piedraA.moverDerecha(self)})
-				piedraA.piedraLimite()
-			} else {
-				game.onTick(110, "moverse", { piedraA.moverIzquierda(self)})
-				piedraA.piedraLimite()
-			}
+			game.onTick(110, "moverse", { piedraA.moverse(self)})
 		}
 	}
 
@@ -81,15 +75,15 @@ class Jugador {
 	method vidas() {
 		var corazones
 		if (vida == 3) {
-			corazones = new Vidas(imagen = "3vidas.png", posicion = posicionVida)
+			corazones = new Vida(imagen = "3vidas.png", posicion = posicionVida)
 			game.addVisual(corazones)
 		}
 		if (vida == 2) {
-			corazones = new Vidas(imagen = "2vidas.png", posicion = posicionVida)
+			corazones = new Vida(imagen = "2vidas.png", posicion = posicionVida)
 			game.addVisual(corazones)
 		}
 		if (vida == 1) {
-			corazones = new Vidas(imagen = "1vida.png", posicion = posicionVida)
+			corazones = new Vida(imagen = "1vida.png", posicion = posicionVida)
 			game.addVisual(corazones)
 		}
 	}
