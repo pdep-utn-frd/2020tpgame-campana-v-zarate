@@ -3,6 +3,7 @@ import characters.*
 import logica.*
 import piedra.*
 import vida.*
+import intro.*
 
 object level {
 
@@ -14,12 +15,10 @@ object level {
 	var piedra2M
 	var vidap1
 	var vidap2
-	const cancha = "gigantedevillafox.png"
+	const property cancha = "gigantedevillafox.png"
 
 	method inicio() {
-		game.width(9)
-		game.height(5)
-		game.boardGround(cancha)
+		game.removeVisual(introduccion.aux())
 		p1 = new Jugador(imagen = "cadu1.png", posicion = game.at(1, 2), limiteIzq = 0, limiteDer = 3, direccion = 1, contador = 0, vida = 3, posicionVida = game.at(2, 4))
 		p2 = new Jugador(imagen = "dalmine_1.png", posicion = game.at(7, 2), limiteIzq = 5, limiteDer = 8, direccion = -1, contador = 0, vida = 3, posicionVida = game.at(6, 4))
 		p1.comandoTeclasP1()

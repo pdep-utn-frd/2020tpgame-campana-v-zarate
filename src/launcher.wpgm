@@ -4,11 +4,13 @@ import level.*
 import logica.*
 import piedra.*
 import vida.*
+import intro.*
 
 program campanavszarate {
-	var sonido
-	level.inicio()
+//	var sonido
+//	sonido = game.sound("yoTeSigo.mp3")
+//	keyboard.x().onPressDo{sonido.play()}
+	introduccion.inicio()
+	keyboard.x().onPressDo{level.inicio()}
 	game.start()
-	sonido = game.sound("yoTeSigo.mp3")
-	sonido.play()
 }
