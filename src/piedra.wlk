@@ -48,7 +48,7 @@ class PiedraMagica inherits Piedra {
 
 	override method serAgarradoPor(player) {
 		if (not move) {
-			player.piedraMagica(true)
+			player.tienePiedraMagica(true)
 		} else {
 			player.recibirGolpe()
 			player.vidas()
@@ -58,3 +58,4 @@ class PiedraMagica inherits Piedra {
 
 }
 
+ 

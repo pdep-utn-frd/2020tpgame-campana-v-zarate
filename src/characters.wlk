@@ -14,7 +14,8 @@ class Jugador {
 	var property direccion
 	var property vida
 	var property posicionVida
-	var property piedraMagica = false
+	var property tienePiedraMagica = false
+	var lanzoPiedraMagica = false
 
 	method image() {
 		return imagen
@@ -66,35 +67,25 @@ class Jugador {
 		}
 	}
 
-	method lanzarPiedraMagicaP1() {
+	method lanzarPiedraMagica(image) {
 		var x = 0
 		var y = 0
-		if (piedraMagica) {
+		if (tienePiedraMagica) {
 			x = posicion.x() + self.direccion()
 			y = posicion.y()
-			const piedraAM = new Piedra(imagen = "piedra_magica_1.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 9, move = true)
+			const piedraAM = new PiedraMagica(imagen = image, posicion = game.at(x, y), limiteIzq = -1, limiteDer = 9, move = true)
 			game.addVisual(piedraAM)
 			game.onTick(110, "moverse2", { piedraAM.moverse(self)})
-		}
-	}
-
-	method lanzarPiedraMagicaP2() {
-		var x = 0
-		var y = 0
-		if (piedraMagica) {
-			x = posicion.x() + self.direccion()
-			y = posicion.y()
-			const piedraAM = new Piedra(imagen = "piedra_magica_2.png", posicion = game.at(x, y), limiteIzq = -1, limiteDer = 9, move = true)
-			game.addVisual(piedraAM)
-			game.onTick(110, "moverse2", { piedraAM.moverse(self)})
+			tienePiedraMagica = false
+			lanzoPiedraMagica = true
 		}
 	}
 
 	method voltearPiedra() {
-		if (piedraMagica) {
+		if (lanzoPiedraMagica) {
 			game.removeTickEvent("moverse2")
+			lanzoPiedraMagica = false
 		}
-		piedraMagica = false
 	}
 
 	method recibirGolpe() {
@@ -126,7 +117,7 @@ class Jugador {
 		keyboard.s().onPressDo{ self.moverAbajo()}
 		keyboard.d().onPressDo{ self.moverDerecha()}
 		keyboard.space().onPressDo{ self.lanzarPiedra()}
-		keyboard.e().onPressDo{ self.lanzarPiedraMagicaP1()}
+		keyboard.e().onPressDo{ self.lanzarPiedraMagica("piedra_magica_1.png")}
 		keyboard.r().onPressDo{ self.voltearPiedra()}
 	}
 
@@ -136,9 +127,10 @@ class Jugador {
 		keyboard.down().onPressDo{ self.moverAbajo()}
 		keyboard.right().onPressDo{ self.moverDerecha()}
 		keyboard.l().onPressDo{ self.lanzarPiedra()}
-		keyboard.k().onPressDo{ self.lanzarPiedraMagicaP2()}
+		keyboard.k().onPressDo{ self.lanzarPiedraMagica("piedra_magica_2.png")}
 		keyboard.j().onPressDo{ self.voltearPiedra()}
 	}
 
 }
 
+ 
